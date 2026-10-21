@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="ko">
+<head><meta charset="UTF-8"><link rel="stylesheet" href="popup.css"><title>AgentUsageV2 연결</title></head>
+<body>
+  <h1>AgentUsage<span>V2</span></h1>
+  <p>앱의 <strong>연결 키 복사</strong>를 누른 뒤 아래에 붙여 넣으세요.</p>
+  <form id="pair-form"><label for="key">연결 키</label><input id="key" type="password" autocomplete="off" spellcheck="false" placeholder="앱에서 복사한 키"><button>앱 연결</button></form>
+  <button id="sync" class="secondary">지금 동기화</button>
+  <p id="status" role="status">연결 후 열린 Claude 사용량 페이지 하나를 1분마다 새로고침합니다.</p>
+  <a href="https://claude.ai/settings/usage" target="_blank" rel="noreferrer">Claude 사용량 페이지 열기 ↗</a>
+  <script src="popup.js"></script>
+</body></html>

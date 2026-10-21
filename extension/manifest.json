@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "AgentUsageV2 · Claude usage bridge",
+  "version": "0.1.0",
+  "description": "열린 Claude 사용량 페이지의 한도 수치만 로컬 AgentUsageV2에 전달합니다.",
+  "permissions": ["storage", "alarms"],
+  "host_permissions": ["http://127.0.0.1/*", "https://claude.ai/settings/usage*"],
+  "background": { "service_worker": "background.js" },
+  "action": { "default_popup": "popup.html" },
+  "content_scripts": [{
+    "matches": ["https://claude.ai/settings/usage*"],
+    "js": ["parser.js", "content.js"],
+    "run_at": "document_idle"
+  }]
+}
