@@ -19,14 +19,23 @@ jobs:
       - run: npm test
       - run: npx playwright install chromium
       - run: npm run test:ui
-      - run: npm run dist:win
+      - name: Build Windows executable ZIP
+        shell: pwsh
+        run: |
+          npm run dist:win:zip 2>&1 | Tee-Object -FilePath windows-package.log
+          $packageExitCode = $LASTEXITCODE
+          if ($packageExitCode -ne 0) {
+            '### Windows ZIP packaging error' | Add-Content -LiteralPath $env:GITHUB_STEP_SUMMARY
+            '```text' | Add-Content -LiteralPath $env:GITHUB_STEP_SUMMARY
+            Get-Content windows-package.log -Tail 60 | Add-Content -LiteralPath $env:GITHUB_STEP_SUMMARY
+            '```' | Add-Content -LiteralPath $env:GITHUB_STEP_SUMMARY
+            exit $packageExitCode
+          }
       - name: Include browser extension
         shell: pwsh
         run: Compress-Archive -Path extension/* -DestinationPath release/AgentUsageV2-browser-extension.zip
       - uses: actions/upload-artifact@v4
         with:
           name: AgentUsageV2-windows
-          path: |
-            release/*.exe
-            release/*.zip
+          path: release/*.zip
           if-no-files-found: error

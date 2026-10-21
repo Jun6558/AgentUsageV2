@@ -96,7 +96,7 @@ npm run test:ui
 npm run dist:win
 ```
 
-`release`에 NSIS 설치 파일과 Windows 실행용 ZIP이 만들어집니다. Linux에서는 `npm run dist:win:zip`으로 실행용 ZIP만 빌드할 수 있습니다. 저장소를 GitHub에 올리면 Windows 워크플로가 테스트 후 설치 파일·실행용 ZIP·브라우저 확장 ZIP을 아티팩트로 제공합니다. 현재 실행 파일과 설치 파일에는 코드 서명이 설정되어 있지 않습니다.
+`release`에 NSIS 설치 파일과 Windows 실행용 ZIP이 만들어집니다. `npm run dist:win:zip`은 실행용 ZIP만 빌드합니다. GitHub의 **Actions → Windows build → 완료된 실행 → Artifacts → AgentUsageV2-windows**에서 테스트를 거친 실행용 ZIP과 브라우저 확장 ZIP을 받을 수 있습니다. 아티팩트 다운로드에는 GitHub 로그인이 필요합니다. CI는 ZIP을 빌드하며 NSIS 설치 프로그램은 별도 로컬 빌드 대상입니다. 현재 실행 파일과 설치 파일에는 코드 서명이 설정되어 있지 않습니다.
 
 ## Linux 클라우드 개발
 
@@ -118,4 +118,4 @@ PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium npm run test:ui
 - `src/`: 3줄 위젯과 상세 사용량·연결 설정 화면
 - `extension/`: Chrome·Edge Manifest V3 확장, 사용량 화면 파서
 - `tests/`: 파서·통신 검증과 Playwright UI 테스트
-- `.github/workflows/windows.yml`: Windows 테스트와 설치 파일 빌드
+- `.github/workflows/windows.yml`: Windows 테스트와 실행용 ZIP 빌드
